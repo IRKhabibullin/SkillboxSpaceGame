@@ -22,6 +22,9 @@ public class ShipController : MonoBehaviour {
     }
 
     public void Explode() {
+        if (gameObject.tag == "Player") {
+            GameObject.Find("GameManager").GetComponent<GameController>().GameOver();
+        }
         Instantiate(shipExplosion, gameObject.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
