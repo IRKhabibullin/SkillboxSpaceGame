@@ -5,10 +5,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     private PlayerShipController ship;
     private GameController game;
+    private ShieldController energyShield;
+
+    [SerializeField] private int shieldCost;
+    [SerializeField] private int shotCost;
+    [SerializeField] private GameObject shieldPrefab;
 
     void Start() {
         ship = GetComponent<PlayerShipController>();
         game = GameObject.Find("GameManager").GetComponent<GameController>();
+        GameObject shield = Instantiate(shieldPrefab, gameObject.transform.position, Quaternion.identity);
+        shield.transform.SetParent(gameObject.transform);
+        energyShield = shield.GetComponent<ShieldController>();
     }
 
     void Update() {
@@ -17,16 +25,20 @@ public class PlayerController : MonoBehaviour {
             ship.Move(input);
         }
 
-        if (game.GetCurrentEnergy() >= 1) {
-            if (Input.GetButton("Fire1")) {
-                if (ship.Shoot()) {
-                    game.UpdateEnergy(-1);
-                }
+        float currentEnergy = game.GetCurrentEnergy();
+        if (Input.GetButton("Fire1") && currentEnergy >= shotCost) {
+            if (ship.Shoot()) {
+                game.UpdateEnergy(-shotCost);
             }
-            if (Input.GetButton("Fire2")) {
-                if (ship.ShootBySideGuns()) {
-                    game.UpdateEnergy(-1);
-                }
+        }
+        if (Input.GetButton("Fire2") && currentEnergy >= shotCost) {
+            if (ship.ShootBySideGuns()) {
+                game.UpdateEnergy(-shotCost);
+            }
+        }
+        if (Input.GetKeyDown("space") && currentEnergy >= shieldCost) {
+            if (energyShield.Enable()) {
+                game.UpdateEnergy(-shieldCost);
             }
         }
     }
