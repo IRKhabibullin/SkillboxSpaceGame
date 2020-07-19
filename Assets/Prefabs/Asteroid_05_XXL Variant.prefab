@@ -45,9 +45,9 @@ MonoBehaviour:
   rotationSpeed: 5
   speed: 25
   size: 5
+  energyBounty: 3
+  scoreBounty: 5
   asteroidExplosion: {fileID: 4946876695391161114, guid: 15ac6b2047d8129459327ad692bb1c98,
-    type: 3}
-  shipExplosion: {fileID: 6267670238054313283, guid: 42801f9d3b016894a9e78537fb022be5,
     type: 3}
 --- !u!1001 &3381502098317418970
 PrefabInstance:

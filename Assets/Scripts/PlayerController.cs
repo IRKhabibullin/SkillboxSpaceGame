@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     private PlayerShipController ship;
+    private GameController game;
 
     void Start() {
         ship = GetComponent<PlayerShipController>();
+        game = GameObject.Find("GameManager").GetComponent<GameController>();
     }
 
     void Update() {
@@ -16,10 +18,14 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (Input.GetButton("Fire1")) {
-            ship.Shoot();
+            if (ship.Shoot()) {
+                game.UpdateEnergy(-1);
+            }
         }
         if (Input.GetButton("Fire2")) {
-            ship.ShootBySideGuns();
+            if (ship.ShootBySideGuns()) {
+                game.UpdateEnergy(-1);
+            }
         }
     }
 }

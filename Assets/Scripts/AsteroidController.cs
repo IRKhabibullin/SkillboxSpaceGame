@@ -6,6 +6,9 @@ public class AsteroidController : MonoBehaviour {
     [SerializeField] private float speed = 25;
     [SerializeField] private int size;
 
+    public float energyBounty;
+    public int scoreBounty;
+
     [SerializeField] private GameObject asteroidExplosion;
 
     void Start() {

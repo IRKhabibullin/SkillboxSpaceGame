@@ -42,6 +42,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flightAngle: 30
+  energyBounty: 2
+  scoreBounty: 3
 --- !u!114 &7334004633016934085
 MonoBehaviour:
   m_ObjectHideFlags: 0

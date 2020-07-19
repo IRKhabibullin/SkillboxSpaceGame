@@ -4,14 +4,16 @@ public class EnemyController : MonoBehaviour {
     private ShipController ship;
     private GameObject player;
     [SerializeField] private float flightAngle;
+    public float energyBounty;
+    public int scoreBounty;
 
     void Start() {
         ship = GetComponent<ShipController>();
         player = GameObject.Find("PlayerShip");
-        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, -ship.speed);
         Vector3 shipAngle = transform.rotation.eulerAngles;
         shipAngle.y = -180f + Random.Range(-flightAngle, flightAngle);
         transform.rotation = Quaternion.Euler(shipAngle);
+        GetComponent<Rigidbody>().velocity = transform.forward * ship.speed;
     }
 
     void Update() {

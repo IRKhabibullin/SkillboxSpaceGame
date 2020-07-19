@@ -44,16 +44,18 @@ public class ShipController : MonoBehaviour {
         //}
     }
 
-    public void Shoot() {
-        Shoot(Quaternion.identity);
+    public bool Shoot() {
+        return Shoot(Quaternion.identity);
     }
 
-    public void Shoot(Quaternion direction) {
+    public bool Shoot(Quaternion direction) {
         if (Time.time > mainGunCooldown + gunCooldown) {
             GameObject shot = Instantiate(lazer, mainGun.position, direction);
             shot.GetComponent<LazerScript>().shootedShip = gameObject;
             mainGunCooldown = Time.time;
+            return true;
         }
+        return false;
     }
 
     private void OnTriggerEnter(Collider other) {
