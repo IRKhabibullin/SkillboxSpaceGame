@@ -26,6 +26,10 @@ public class GameController : MonoBehaviour {
         energyText.text = $"Energy: {(int)energy}";
     }
 
+    public int GetCurrentEnergy() {
+        return (int)energy;
+    }
+
     public void UpdateScore(int points) {
         score += points;
         scoreText.text = $"Score: {score}";

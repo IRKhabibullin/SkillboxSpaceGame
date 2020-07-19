@@ -17,14 +17,16 @@ public class PlayerController : MonoBehaviour {
             ship.Move(input);
         }
 
-        if (Input.GetButton("Fire1")) {
-            if (ship.Shoot()) {
-                game.UpdateEnergy(-1);
+        if (game.GetCurrentEnergy() >= 1) {
+            if (Input.GetButton("Fire1")) {
+                if (ship.Shoot()) {
+                    game.UpdateEnergy(-1);
+                }
             }
-        }
-        if (Input.GetButton("Fire2")) {
-            if (ship.ShootBySideGuns()) {
-                game.UpdateEnergy(-1);
+            if (Input.GetButton("Fire2")) {
+                if (ship.ShootBySideGuns()) {
+                    game.UpdateEnergy(-1);
+                }
             }
         }
     }
