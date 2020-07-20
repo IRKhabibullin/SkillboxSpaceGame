@@ -44,8 +44,8 @@ MonoBehaviour:
   rotationSpeed: 5
   speed: 25
   size: 2
-  energyBounty: 1.35
-  scoreBounty: 2
+  energyBounty: 2.45
+  scoreBounty: 4
   asteroidExplosion: {fileID: 4946876695391161114, guid: 15ac6b2047d8129459327ad692bb1c98,
     type: 3}
 --- !u!1001 &279165938396976774

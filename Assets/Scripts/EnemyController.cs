@@ -4,6 +4,7 @@ public class EnemyController : MonoBehaviour {
     private ShipController ship;
     private GameObject player;
     [SerializeField] private float flightAngle;
+    [SerializeField] private float shootDistance;
     public float energyBounty;
     public int scoreBounty;
 
@@ -21,7 +22,7 @@ public class EnemyController : MonoBehaviour {
             return;
         }
         // AI thingy
-        if (Time.time > ship.GetMainGunCooldown() + ship.gunCooldown) {
+        if (Time.time > ship.GetMainGunCooldown() + ship.gunCooldown && transform.position.z > shootDistance) {
             Quaternion direction = Quaternion.LookRotation(player.transform.position - transform.position);
             ship.Shoot(direction);
         }

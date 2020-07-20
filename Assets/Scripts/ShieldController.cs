@@ -11,8 +11,9 @@ public class ShieldController : MonoBehaviour {
     }
 
     public bool Enable() {
-        if (Time.time + shieldCooldown > shieldLastEnabled) {
+        if (Time.time > shieldCooldown + shieldLastEnabled) {
             gameObject.SetActive(true);
+            shieldLastEnabled = Time.time;
             return true;
         }
         return false;
