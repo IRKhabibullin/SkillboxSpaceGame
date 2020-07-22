@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
         game = GameObject.Find("GameManager").GetComponent<GameController>();
         GameObject shield = Instantiate(shieldPrefab, gameObject.transform.position, Quaternion.identity);
         shield.transform.SetParent(gameObject.transform);
+        shield.GetComponent<ShieldController>().shieldOwner = gameObject;
         energyShield = shield.GetComponent<ShieldController>();
     }
 
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
         if (Input.GetKeyDown("space") && currentEnergy >= shieldCost) {
-            if (energyShield.Enable()) {
+            if (energyShield.Activate()) {
                 game.UpdateEnergy(-shieldCost);
             }
         }

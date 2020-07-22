@@ -7,9 +7,10 @@ public class ShieldController : MonoBehaviour {
     [SerializeField] private int shieldCooldown;
     private float currentCooldown;
     private Slider cooldownSlider;
+    public GameObject shieldOwner;
 
     void Start() {
-        gameObject.SetActive(false);
+        Toggle(false);
         cooldownSlider = GameObject.Find("ShieldSlider").GetComponent<Slider>();
         currentCooldown = shieldCooldown;
     }
@@ -21,23 +22,31 @@ public class ShieldController : MonoBehaviour {
         }
     }
 
-    public bool Enable() {
+    public bool Activate() {
         if (currentCooldown >= shieldCooldown) {
-            gameObject.SetActive(true);
+            Toggle(true);
             currentCooldown = 0;
             return true;
         }
         return false;
     }
 
+    private void Toggle(bool value) {
+        GetComponent<MeshRenderer>().enabled = value;
+        GetComponent<SphereCollider>().enabled = value;
+    }
+
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Lazer")) {
+            if (other.gameObject.GetComponent<LazerScript>().shootedShip == shieldOwner) {
+                return;
+            }
             Destroy(other.gameObject);
-            gameObject.SetActive(false);
+            Toggle(false);
         } else if (other.gameObject.layer == LayerMask.NameToLayer("Asteroid")) {
             AsteroidController asteroid = (AsteroidController)other.gameObject.GetComponent<AsteroidController>();
             asteroid.Explode();
-            gameObject.SetActive(false);
+            Toggle(false);
         }
     }
 }
